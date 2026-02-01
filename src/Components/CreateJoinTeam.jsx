@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import api from "../../api/axios";
+import api from "../api/axios";  
 import { useDispatch, useSelector } from "react-redux";
-import { setTeamAndBoards } from "../../../redux/Slices/teamBoardSlice";
+import { setTeamAndBoards } from "../../redux/Slices/teamBoardSlice";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import "../Navbar.css";
+import "./Navbar.css";  
 
 const CreateJoinTeam = () => {
   const dispatch = useDispatch();

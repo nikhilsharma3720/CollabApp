@@ -14,7 +14,7 @@ import Navbar from "./Components/Navbar";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Board from "./pages/Board";
-import CreateJoinTeam from "./Components/Teams/createJoinTeam";
+import CreateJoinTeam from "./Components/CreateJoinTeam";
 import api from "./api/axios";
 import { setUser, clearUser } from "../redux/Slices/userSlice";
 
