@@ -13,7 +13,7 @@ import Navbar from "./components/Navbar.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Board from "./pages/Board.jsx";
-import CreateJoinTeam from "./Components/Teams/createJoinTeam.jsx";
+import CreateJoinTeam from "./Components/CreateJoinTeam.jsx";
 import api from "./api/axios";
 import { setUser, clearUser } from "../redux/Slices/userSlice";
 
