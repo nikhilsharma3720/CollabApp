@@ -9,11 +9,11 @@ import { Provider, useDispatch } from "react-redux";
 import { store } from "../redux/store";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
-import Navbar from "./components/Navbar";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-import Board from "./pages/Board";
-import CreateJoinTeam from "./Components/Teams/createJoinTeam";
+import Navbar from "./components/Navbar.jsx";
+import SignIn from "./pages/SignIn.jsx";
+import SignUp from "./pages/SignUp.jsx";
+import Board from "./pages/Board.jsx";
+import CreateJoinTeam from "./Components/Teams/createJoinTeam.jsx";
 import api from "./api/axios";
 import { setUser, clearUser } from "../redux/Slices/userSlice";
 
