@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import BoardCard from "../components/BoardCard";
+import BoardCard from "../Components/BoardCard";
 import { useSelector } from "react-redux";
 import api from "../api/axios";
 import socket from "../../socket";
