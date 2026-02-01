@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/", // change port if needed
-  withCredentials: true, // useful if you use cookies later
+  baseURL: "https://collabapp-backend.onrender.com",  
+  withCredentials: true,  
   headers: {
     "Content-Type": "application/json",
   },
