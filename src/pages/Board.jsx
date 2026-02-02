@@ -29,12 +29,14 @@ export default function Board() {
       const res = await api.get(`/boards/fetchByTeamId/${teamId}`, {
         withCredentials: true,
       });
+      // Extract array correctly based on your backend response structure
       const boardData = Array.isArray(res.data)
         ? res.data
         : res.data.boards || [];
       setBoards(boardData);
     } catch (err) {
       console.error("Failed to fetch boards:", err);
+      toast.error("Failed to load boards");
     } finally {
       setLoading(false);
     }
@@ -44,29 +46,33 @@ export default function Board() {
     fetchBoardsByTeam();
   }, [fetchBoardsByTeam]);
 
-  /* ================= SOCKET.IO REAL-TIME LOGIC ================= */
+  /* ================= CONSOLIDATED SOCKET.IO LOGIC ================= */
   useEffect(() => {
     if (!teamId || !user?.id) return;
 
     const roomName = `team:${teamId}`;
 
+    // Join room with full user data
     socket.emit("joinTeam", {
       teamId: roomName,
       user: { _id: user.id, name: user.name, email: user.email },
     });
 
+    // Handle board creation from others
     socket.on("board-created", (newBoard) => {
-      if (newBoard.createdBy?._id !== user.id) {
-        toast.success(
-          `${newBoard.createdBy?.name || "Teammate"} created a board`,
-          { icon: "🚀" },
-        );
-      }
-      setBoards((prev) =>
-        prev.some((b) => b._id === newBoard._id) ? prev : [...prev, newBoard],
-      );
+      setBoards((prev) => {
+        if (prev.some((b) => b._id === newBoard._id)) return prev;
+        if (newBoard.createdBy?._id !== user.id) {
+          toast.success(
+            `${newBoard.createdBy?.name || "Teammate"} created a board`,
+            { icon: "🚀" },
+          );
+        }
+        return [...prev, newBoard];
+      });
     });
 
+    // Handle board deletion
     socket.on("board-deleted", ({ boardId, deletedBy }) => {
       if (deletedBy?.email !== user.email) {
         toast.error(`${deletedBy?.name || "Teammate"} deleted a board`);
@@ -75,6 +81,7 @@ export default function Board() {
       setActiveModalBoard((prev) => (prev === boardId ? null : prev));
     });
 
+    // Handle new notes
     socket.on("note-added", ({ boardId, note }) => {
       if (note.user?.email !== user.email) {
         toast(`${note.user?.name || "Teammate"} added a note`, { icon: "📝" });
@@ -91,25 +98,19 @@ export default function Board() {
       );
     });
 
-    socket.on("note-deleted", ({ boardId, noteId, deletedBy }) => {
-      if (deletedBy?.email !== user.email) {
-        toast.error("A note was removed");
-      }
-      setBoards((prev) =>
-        prev.map((b) =>
-          b._id === boardId
-            ? { ...b, notes: b.notes.filter((n) => n._id !== noteId) }
-            : b,
-        ),
-      );
+    // Handle online user count
+    socket.on("team-users-count", (data) => {
+      const count = Array.isArray(data) ? data.length : data;
+      setOnlineUsers(count);
     });
 
+    // Cleanup listeners on unmount or dependency change
     return () => {
-      socket.off("team-users-online");
       socket.off("board-created");
       socket.off("board-deleted");
       socket.off("note-added");
       socket.off("note-deleted");
+      socket.off("team-users-count");
     };
   }, [teamId, user]);
 
@@ -118,12 +119,18 @@ export default function Board() {
     if (!newBoardTitle.trim() || isCreating) return;
     setIsCreating(true);
     try {
-      await api.post(
+      const res = await api.post(
         "/boards",
         { title: newBoardTitle, teamId },
         { withCredentials: true },
       );
+
+      // ✅ OPTIMISTIC UPDATE: Add board immediately to UI
+      const createdBoard = res.data;
+      setBoards((prev) => [...prev, createdBoard]);
+
       setNewBoardTitle("");
+      toast.success("Board created!");
     } catch (err) {
       toast.error("Failed to create board");
     } finally {
@@ -132,6 +139,7 @@ export default function Board() {
   };
 
   const copyToClipboard = () => {
+    if (!teamJoinCode) return;
     navigator.clipboard.writeText(teamJoinCode);
     toast.success("Invite code copied!");
   };
@@ -153,31 +161,12 @@ export default function Board() {
     setDraggedBoardIndex(null);
   };
 
-  /* ================= SOCKET.IO ================= */
-  useEffect(() => {
-    if (!teamId || !user?.id) return;
-
-    socket.emit("joinTeam", teamId);
-
-    socket.on("team-users-count", (data) => {
-      const count = Array.isArray(data) ? data.length : data;
-      setOnlineUsers(count);
-    });
-
-    socket.emit("get-initial-count", teamId);
-
-    return () => {
-      socket.off("team-users-count");
-    };
-  }, [teamId, user?.id]);
-
   return (
     <div className="app-wrapper">
       <header className="app-header">
         <div className="header-text">
           <div className="title-row">
             <h2>{teamName}</h2>
-            {/* --- LIVE STATUS PILL --- */}
             <div className="online-pill">
               <span className="pulse-dot"></span>
               {onlineUsers} online
