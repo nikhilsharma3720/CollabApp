@@ -119,15 +119,13 @@ export default function Board() {
     if (!newBoardTitle.trim() || isCreating) return;
     setIsCreating(true);
     try {
-      const res = await api.post(
+      // Just make the API call.
+      // The socket listener "board-created" below will handle adding it to the UI.
+      await api.post(
         "/boards",
         { title: newBoardTitle, teamId },
         { withCredentials: true },
       );
-
-      // ✅ OPTIMISTIC UPDATE: Add board immediately to UI
-      const createdBoard = res.data;
-      setBoards((prev) => [...prev, createdBoard]);
 
       setNewBoardTitle("");
       toast.success("Board created!");
