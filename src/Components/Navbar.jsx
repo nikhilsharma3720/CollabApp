@@ -18,21 +18,24 @@ export default function Navbar() {
       .join(" ");
   };
 
-  const handleLogout = async () => {
+const handleLogout = async () => {
     try {
+      // 1. Tell backend to clear the HttpOnly cookie
       await api.post("/logout", {}, { withCredentials: true });
-
+    } catch (err) {
+      console.error("Cookie clear failed on server, forcing local clear:", err);
+    } finally {
+      // 2. Clear Redux State
       dispatch(clearUser());
 
-      localStorage.removeItem("teamId");
-      localStorage.removeItem("user");
+      // 3. Wipe ALL local storage (Team ID, Join Code, User info)
+      localStorage.clear();
 
-      localStorage.removeItem("teamName");
-      localStorage.removeItem("teamJoinCode");
-
-      navigate("/signin");
-    } catch (err) {
-      console.error("Logout failed:", err);
+      // 4. Redirect and prevent "Back" button from returning to the app
+      navigate("/signin", { replace: true });
+      
+      // Optional: Force a page reload to ensure all socket/api states are fresh
+      window.location.reload(); 
     }
   };
   return (

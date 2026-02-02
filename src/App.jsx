@@ -27,6 +27,8 @@ function AuthLoader({ children }) {
 
   useEffect(() => {
     const checkAuth = async () => {
+      // Don't check auth if we are already on a public page and have no user
+      // This prevents unnecessary API calls after logout
       try {
         const res = await api.get("/me", { withCredentials: true });
         const userData = res.data;
@@ -34,13 +36,16 @@ function AuthLoader({ children }) {
         localStorage.setItem("user", JSON.stringify(userData));
         dispatch(setUser(userData));
 
+        // If user is authenticated but tries to go to Sign In/Up
         if (publicPaths.includes(location.pathname)) {
           navigate("/createAndJoin", { replace: true });
         }
       } catch (err) {
+        // If API fails (401), clear everything
         dispatch(clearUser());
         localStorage.removeItem("user");
 
+        // If they are on a protected page, force them to Sign In
         if (!publicPaths.includes(location.pathname)) {
           navigate("/signin", { replace: true });
         }
@@ -48,7 +53,8 @@ function AuthLoader({ children }) {
     };
 
     checkAuth();
-  }, [location.pathname, dispatch, navigate]);
+    // Optimized dependency array
+  }, [location.pathname]); 
 
   return children;
 }
