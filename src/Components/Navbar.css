@@ -33,7 +33,8 @@
 }
 
 /* Logout & Auth Buttons */
-.logout-btn, .nav-link {
+.logout-btn,
+.nav-link {
   padding: 8px 16px;
   border-radius: 10px;
   font-size: 0.9rem;
@@ -60,28 +61,12 @@
     gap: 8px; /* Tighter gap */
   }
 
-  .logout-btn, .nav-link {
+  .logout-btn,
+  .nav-link {
     padding: 6px 10px; /* Smaller buttons */
     font-size: 0.8rem;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .navbar {
   display: flex;
@@ -89,7 +74,7 @@
   align-items: center;
   padding: 1rem 2rem;
   background: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
@@ -148,16 +133,11 @@
   transform: translateY(-1px);
 }
 
-
-
-
-
-
 .team-page-container {
   max-width: 900px;
   margin: 0 auto;
   padding: 60px 20px;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
 }
 
 .team-header {
@@ -190,13 +170,26 @@
   padding: 30px;
   border-radius: 16px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-.team-card h3 { font-size: 1.25rem; margin-bottom: 10px; color: #0f172a; }
-.team-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 20px; line-height: 1.4; }
+.team-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+.team-card p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
 
-.team-input-group { display: flex; flex-direction: column; gap: 12px; }
+.team-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .team-input {
   padding: 12px 16px;
@@ -214,11 +207,23 @@
   cursor: pointer;
 }
 
-.team-btn.primary { background: #2563eb; color: white; }
-.team-btn.secondary { background: #059669; color: white; }
+.team-btn.primary {
+  background: #2563eb;
+  color: white;
+}
+.team-btn.secondary {
+  background: #059669;
+  color: white;
+}
 
 /* Divider Styles */
-.divider-vertical { display: flex; align-items: center; color: #94a3b8; font-weight: 700; font-size: 0.8rem; }
+.divider-vertical {
+  display: flex;
+  align-items: center;
+  color: #94a3b8;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
 
 /* --- Existing Teams UX (List Style) --- */
 .existing-teams-container {
@@ -226,7 +231,7 @@
   background: white;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
 }
 
 .list-header {
@@ -238,10 +243,23 @@
   align-items: center;
 }
 
-.list-header h4 { margin: 0; font-size: 0.85rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; }
-.team-count { font-size: 0.75rem; color: #94a3b8; font-weight: 600; }
+.list-header h4 {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.team-count {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
 
-.compact-team-list { max-height: 320px; overflow-y: auto; }
+.compact-team-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
 
 .compact-item {
   display: flex;
@@ -252,7 +270,9 @@
   transition: all 0.2s;
 }
 
-.compact-item:hover { background: #f0f7ff; }
+.compact-item:hover {
+  background: #f0f7ff;
+}
 
 .compact-icon {
   width: 36px;
@@ -267,9 +287,21 @@
   margin-right: 15px;
 }
 
-.compact-info { display: flex; flex-direction: column; flex: 1; }
-.compact-info .name { font-weight: 600; color: #1e293b; font-size: 0.95rem; }
-.compact-info .code { font-size: 0.75rem; color: #94a3b8; font-family: monospace; }
+.compact-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.compact-info .name {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.95rem;
+}
+.compact-info .code {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-family: monospace;
+}
 
 .open-btn {
   opacity: 0;
@@ -283,33 +315,58 @@
   transition: all 0.2s;
 }
 
-.compact-item:hover .open-btn { opacity: 1; }
-.open-btn:hover { background: #2563eb; color: white; }
+.compact-item:hover .open-btn {
+  opacity: 1;
+}
+.open-btn:hover {
+  background: #2563eb;
+  color: white;
+}
 
 /* Mobile Support */
 @media (max-width: 650px) {
-  .team-selection-grid { flex-direction: column; }
-  .divider-vertical { padding: 10px 0; justify-content: center; transform: rotate(0deg); }
-  .open-btn { opacity: 1; border: none; padding-right: 0; }
+  .team-selection-grid {
+    flex-direction: column;
+  }
+  .divider-vertical {
+    padding: 10px 0;
+    justify-content: center;
+    transform: rotate(0deg);
+  }
+  .open-btn {
+    opacity: 1;
+    border: none;
+    padding-right: 0;
+  }
 }
-
-
-
-
-
 
 .team-page-container {
   max-width: 900px;
   margin: 0 auto;
   padding: 60px 20px;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
 }
 
-.team-header { text-align: center; margin-bottom: 40px; }
-.team-header h2 { font-size: 2.2rem; font-weight: 800; color: #1e293b; margin: 0; }
-.team-header p { color: #64748b; margin-top: 8px; }
+.team-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.team-header h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+}
+.team-header p {
+  color: #64748b;
+  margin-top: 8px;
+}
 
-.team-selection-grid { display: flex; gap: 20px; margin-bottom: 40px; }
+.team-selection-grid {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+}
 
 .team-card {
   flex: 1;
@@ -317,21 +374,58 @@
   padding: 30px;
   border-radius: 16px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-.team-card h3 { font-size: 1.25rem; margin-bottom: 10px; color: #0f172a; }
-.team-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 20px; }
+.team-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+.team-card p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 20px;
+}
 
-.team-input-group { display: flex; flex-direction: column; gap: 12px; }
-.team-input { padding: 12px 16px; border-radius: 10px; border: 1px solid #cbd5e1; outline: none; }
+.team-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.team-input {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+}
 
-.team-btn { padding: 12px; border-radius: 10px; font-weight: 600; border: none; cursor: pointer; transition: 0.2s; }
-.team-btn.primary { background: #2563eb; color: white; }
-.team-btn.secondary { background: #059669; color: white; }
-.team-btn:hover { filter: brightness(1.1); }
+.team-btn {
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.team-btn.primary {
+  background: #2563eb;
+  color: white;
+}
+.team-btn.secondary {
+  background: #059669;
+  color: white;
+}
+.team-btn:hover {
+  filter: brightness(1.1);
+}
 
-.divider-vertical { display: flex; align-items: center; color: #94a3b8; font-weight: 700; }
+.divider-vertical {
+  display: flex;
+  align-items: center;
+  color: #94a3b8;
+  font-weight: 700;
+}
 
 /* Existing Teams List */
 .existing-teams-container {
@@ -339,7 +433,7 @@
   background: white;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
 }
 
 .list-header {
@@ -359,44 +453,83 @@
   transition: 0.2s;
 }
 
-.compact-item:hover { background: #f0f7ff; }
-
-.compact-icon {
-  width: 36px; height: 36px; background: #3b82f6; color: white;
-  border-radius: 8px; display: flex; align-items: center; justify-content: center;
-  font-weight: 800; margin-right: 15px;
+.compact-item:hover {
+  background: #f0f7ff;
 }
 
-.compact-info { flex: 1; display: flex; flex-direction: column; }
-.compact-info .name { font-weight: 600; color: #1e293b; }
-.compact-info .code { font-size: 0.75rem; color: #94a3b8; font-family: monospace; }
+.compact-icon {
+  width: 36px;
+  height: 36px;
+  background: #3b82f6;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  margin-right: 15px;
+}
 
-.compact-actions { display: flex; align-items: center; gap: 12px; }
+.compact-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.compact-info .name {
+  font-weight: 600;
+  color: #1e293b;
+}
+.compact-info .code {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+.compact-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
 .open-btn {
-  opacity: 0; background: transparent; color: #2563eb;
-  border: 1px solid #2563eb; padding: 6px 12px; border-radius: 6px;
-  font-size: 0.75rem; font-weight: 700; transition: 0.2s;
+  opacity: 0;
+  background: transparent;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: 0.2s;
 }
 
 .delete-team-btn {
-  opacity: 0; background: transparent; border: none;
-  font-size: 1.1rem; cursor: pointer; transition: 0.2s;
+  opacity: 0;
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .compact-item:hover .open-btn,
-.compact-item:hover .delete-team-btn { opacity: 1; }
-
-.delete-team-btn:hover { transform: scale(1.2); }
-
-@media (max-width: 650px) {
-  .team-selection-grid { flex-direction: column; }
-  .open-btn, .delete-team-btn { opacity: 1; }
+.compact-item:hover .delete-team-btn {
+  opacity: 1;
 }
 
+.delete-team-btn:hover {
+  transform: scale(1.2);
+}
 
-
-
+@media (max-width: 650px) {
+  .team-selection-grid {
+    flex-direction: column;
+  }
+  .open-btn,
+  .delete-team-btn {
+    opacity: 1;
+  }
+}
 
 .note-card-v2 {
   background: #ffffff;
@@ -468,8 +601,14 @@
   transition: all 0.2s;
 }
 
-.icon-btn.edit:hover { background: #dcfce7; border-color: #86efac; }
-.icon-btn.delete:hover { background: #fee2e2; border-color: #fca5a5; }
+.icon-btn.edit:hover {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+.icon-btn.delete:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
 
 /* Editing State */
 .note-textarea {
@@ -509,17 +648,14 @@
   cursor: pointer;
 }
 
-
-
-
-
-
 /* Container: No border, just shadow for depth */
 .inline-modal {
   background: #ffffff;
   padding: 16px;
   border-radius: 12px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.05);
   margin-top: 12px;
   border: none !important; /* Removes that extra outer border */
 }
@@ -588,45 +724,12 @@
   color: #f43f5e; /* Turns soft red on hover */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* --- Hero Section --- */
 .team-page-container {
   max-width: 1000px;
   margin: 60px auto;
   padding: 0 20px;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
 }
 
 .team-hero {
@@ -660,14 +763,14 @@
   padding: 30px;
   border-radius: 20px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   position: relative;
   transition: transform 0.2s;
 }
 
 .action-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 .card-badge {
@@ -681,8 +784,14 @@
   text-transform: uppercase;
 }
 
-.card-badge.create { background: #dcfce7; color: #166534; }
-.card-badge.join { background: #e0e7ff; color: #3730a3; }
+.card-badge.create {
+  background: #dcfce7;
+  color: #166534;
+}
+.card-badge.join {
+  background: #e0e7ff;
+  color: #3730a3;
+}
 
 .action-input-box {
   margin-top: 20px;
@@ -715,7 +824,9 @@
   cursor: pointer;
 }
 
-.btn-main:hover { background: #334155; }
+.btn-main:hover {
+  background: #334155;
+}
 
 /* --- Workspace Grid --- */
 .workspaces-section {
@@ -827,7 +938,6 @@
   background: #e2e8f0;
 }
 
-
 /* --- Responsive Adjustments --- */
 
 /* 1. Fix the main container padding for small screens */
@@ -857,11 +967,11 @@
 
   /* Hide the vertical divider lines on mobile, or rotate them */
   .visual-divider {
-    flex-direction: row; 
+    flex-direction: row;
     width: 100%;
     margin: 10px 0;
   }
-  
+
   .visual-divider .line {
     width: 100%; /* Line goes horizontal now */
     height: 1px;
@@ -891,28 +1001,13 @@
     height: 40px;
     font-size: 1rem;
   }
-  
+
   /* Make the delete button visible by default on mobile since there's no hover */
   .ws-leave-btn {
     opacity: 1;
     margin-right: 5px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Ensure everything stays inside the viewport */
 * {
@@ -971,8 +1066,6 @@
   }
 }
 
-
-
 .workspace-card {
   display: flex;
   align-items: center;
@@ -992,4 +1085,741 @@
   overflow: hidden;
   text-overflow: ellipsis; /* Turns "Very Long Team Name" into "Very Long Te..." */
   display: block;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(241, 245, 249, 0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Styling */
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: -0.5px;
+}
+
+.logo-text span {
+  color: #6366f1;
+}
+
+/* User Profile Pill */
+.nav-user-area {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-info-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  background: #f1f5f9;
+  border-radius: 100px;
+}
+
+.nav-avatar {
+  width: 28px;
+  height: 28px;
+  background: #ffffff;
+  color: #4f46e5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.nav-username {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* Buttons & Links */
+.nav-logout-btn {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-logout-btn:hover {
+  background: #fef2f2;
+  color: #ef4444;
+  border-color: #fee2e2;
+}
+
+.nav-link-secondary {
+  text-decoration: none;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-right: 24px;
+}
+
+.nav-link-primary {
+  text-decoration: none;
+  background: #0f172a;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.2s;
+}
+
+.nav-link-primary:hover {
+  transform: translateY(-1px);
+  background: #1e293b;
+}
+
+/* Mobile Tweak */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 0 20px;
+  }
+  .nav-username {
+    display: none;
+  }
+  .user-info-pill {
+    padding: 6px;
+  }
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  height: 72px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-container {
+  width: 95%; /* Matches your board width logic */
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- LOGO: Sync Aesthetic --- */
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.sync-logo-box {
+  width: 32px;
+  height: 32px;
+  background: #4f46e5;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sync-dot {
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.logo-brand {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: #0f172a;
+}
+
+/* --- USER PILL --- */
+.user-profile-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f1f5f9;
+  padding: 6px 14px 6px 6px;
+  border-radius: 100px;
+  transition: background 0.2s;
+}
+
+.nav-avatar-circle {
+  width: 30px;
+  height: 30px;
+  background: #4f46e5;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.nav-display-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* --- BUTTONS --- */
+.nav-logout-minimal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.nav-logout-minimal:hover {
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.nav-link-cta {
+  background: #4f46e5;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+/* --- MOBILE TWEAKS --- */
+@media (max-width: 768px) {
+  .nav-display-name,
+  .nav-logout-minimal span {
+    display: none; /* Keep it clean on phone */
+  }
+  .user-profile-pill {
+    padding: 6px;
+  }
+}
+
+/* --- THE AURORA PALETTE --- */
+:root {
+  --sync-purple: #7c3aed; /* Deep Violet */
+  --sync-blue: #3b82f6; /* Royal Blue */
+  --sync-cyan: #06b6d4; /* Electric Cyan */
+  --sync-midnight: #0f172a; /* Dark Navy Background */
+}
+
+.sync-icon-container {
+  width: 36px;
+  height: 36px;
+  background: var(--sync-midnight);
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2); /* Purple Glow */
+}
+
+.sync-orbit {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  position: relative;
+  animation: sync-rotate 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.sync-particle {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+/* Particle 1: Purple Glow */
+.p1 {
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--sync-purple);
+  box-shadow: 0 0 12px var(--sync-purple);
+}
+
+/* Particle 2: Blue Glow */
+.p2 {
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--sync-cyan);
+  box-shadow: 0 0 12px var(--sync-cyan);
+}
+
+/* --- THE BRAND NAME (Purple-Blue Gradient) --- */
+.logo-brand {
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.4em;
+  margin-left: 12px;
+  /* Smooth transition from Purple to Blue */
+  background: linear-gradient(
+    135deg,
+    var(--sync-purple) 0%,
+    var(--sync-blue) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+}
+
+/* Update the 'Get Started' button to match */
+.nav-link-cta {
+  background: linear-gradient(
+    135deg,
+    var(--sync-purple) 0%,
+    var(--sync-blue) 100%
+  );
+  color: white;
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+  transition: all 0.3s ease;
+}
+
+.nav-link-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+}
+
+/* Update the Avatar Circle */
+.nav-avatar-circle {
+  background: var(--sync-midnight);
+  color: white;
+  border: 1.5px solid var(--sync-purple);
+  font-weight: 700;
+}
+.sync-orbit {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  position: relative;
+
+  /* FIXED: Added 'infinite' and 'linear' for smooth continuous movement */
+  animation: sync-spin 3s linear infinite;
+
+  /* Helps with smooth movement in Chrome/Safari */
+  will-change: transform;
+}
+
+/* Ensure the container doesn't block the animation */
+.sync-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* THE KEYFRAME: Move this to the very bottom of your CSS file */
+@keyframes sync-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Container for the Auth Links */
+.nav-auth-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* GET STARTED: The Gradient Action Button */
+.nav-link-cta {
+  text-decoration: none;
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+  color: white !important;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+}
+
+.nav-link-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+  filter: brightness(1.1);
+}
+
+/* Ensure the Navbar itself handles the height properly */
+.navbar {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  /* Make sure background matches the dark theme if you're on the landing page */
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.navbar {
+  position: fixed; /* Keep it at the top while scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+
+  /* The Glass Effect */
+  background: rgba(255, 255, 255, 0.05); /* Very transparent white */
+  backdrop-filter: blur(15px); /* Frost effect */
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle edge */
+}
+
+.nav-container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- LOGO SECTION --- */
+.sync-icon-container {
+  width: 36px;
+  height: 36px;
+  background: rgba(15, 23, 42, 0.5); /* Semi-transparent navy */
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(124, 58, 237, 0.3); /* Purple border glow */
+}
+
+.logo-brand {
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.4em;
+  color: white; /* Bright white to pop against the glass */
+  text-shadow: 0 0 20px rgba(124, 58, 237, 0.5); /* Soft glow */
+}
+
+/* --- AUTH LINKS --- */
+
+.nav-link-cta {
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.nav-link-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5);
+}
+.sync-icon-container {
+  width: 38px;
+  height: 38px;
+  /* Glass container for the icon */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* THE ANIMATION (Always active) */
+.sync-orbit {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  position: relative;
+  animation: sync-spin 3s linear infinite; /* Same spin as the big loader */
+}
+
+.sync-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Purple Particle */
+.p1 {
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #7c3aed;
+  box-shadow: 0 0 10px #7c3aed;
+}
+
+/* Blue/Cyan Particle */
+.p2 {
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3b82f6;
+  box-shadow: 0 0 10px #3b82f6;
+}
+
+/* THE BRAND NAME */
+.logo-brand {
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 0.4em;
+  color: white;
+  margin-left: 12px;
+  text-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+}
+
+@keyframes sync-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  /* Glass Effect */
+  background: rgba(15, 23, 42, 0.2); /* Tinted navy glass */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  z-index: 9999; /* Ensure it stays on top of everything */
+}
+
+.nav-container {
+  width: 92%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Ensure actions are visible */
+.nav-actions {
+  display: flex;
+  align-items: center;
+}
+
+.nav-auth-links {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+/* SIGN IN - Make it visible on both light/dark glass */
+
+/* GET STARTED - The high-visibility button */
+.nav-link-cta {
+  text-decoration: none !important;
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+  color: white !important;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+  display: inline-block; /* Ensure it respects padding */
+}
+
+.nav-link-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+}
+
+/* Navbar.css */
+
+.nav-link-subtle {
+  text-decoration: none;
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+
+  /* The Button Style */
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+  background: rgba(255, 255, 255, 0.05); /* Very slight fill */
+
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link-subtle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #a78bfa; /* Glow purple on hover */
+  color: #a78bfa !important;
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.2);
+}
+
+/* Navbar.css */
+
+.nav-link-subtle {
+  text-decoration: none;
+  color: #4f46e5 !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+
+  /* The Button Style */
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+  background: rgba(255, 255, 255, 0.05); /* Very slight fill */
+
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link-subtle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #a78bfa; /* Glow purple on hover */
+  color: #a78bfa !important;
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.2);
+}
+
+/* Navbar.css */
+
+/* ... your existing styles ... */
+
+@media (max-width: 600px) {
+  .nav-container {
+    width: 95%;
+    padding: 0 10px;
+  }
+
+  /* Scale down the logo brand name so it fits */
+  .logo-brand {
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    margin-left: 8px;
+  }
+
+  .sync-icon-container {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-auth-links {
+    gap: 12px; /* Reduce gap between buttons */
+  }
+
+  /* Make the buttons smaller for mobile */
+  .nav-link-subtle {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border: none; /* Remove border on mobile to save visual space */
+    background: transparent;
+  }
+
+  .nav-link-cta {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+  }
+
+  /* If user is logged in, hide the display name to save space */
+  .nav-display-name {
+    display: none;
+  }
+
+  .user-profile-pill {
+    padding: 4px;
+  }
 }

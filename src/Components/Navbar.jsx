@@ -18,59 +18,71 @@ export default function Navbar() {
       .join(" ");
   };
 
-const handleLogout = async () => {
+  const handleLogout = async () => {
     try {
-      // 1. Tell backend to clear the HttpOnly cookie
       await api.post("/logout", {}, { withCredentials: true });
     } catch (err) {
-      console.error("Cookie clear failed on server, forcing local clear:", err);
+      console.error("Logout error:", err);
     } finally {
-      // 2. Clear Redux State
       dispatch(clearUser());
-
-      // 3. Wipe ALL local storage (Team ID, Join Code, User info)
       localStorage.clear();
-
-      // 4. Redirect and prevent "Back" button from returning to the app
       navigate("/signin", { replace: true });
-      
-      // Optional: Force a page reload to ensure all socket/api states are fresh
-      window.location.reload(); 
+      window.location.reload();
     }
   };
+
   return (
     <nav className="navbar">
-      <div
-        className="logo"
-        onClick={() => navigate("/")}
-        style={{ cursor: "pointer" }}
-      >
-        CollabApp
-      </div>
-
-      <div className="nav-links">
-        {user?.isLoggedIn ? (
-          <>
-            <div className="user-profile">
-              <div className="avatar">{getDisplayName().charAt(0)}</div>
-              <span className="user-greeting">
-                Hi, <strong>{getDisplayName()}</strong>
-              </span>
+      <div className="nav-container">
+        {/* REBRANDED LOGO SECTION */}
+        <div className="logo-section" onClick={() => navigate("/")}>
+  <div className="sync-icon-container">
+    {/* This is the loader animation inside the Navbar */}
+    <div className="sync-orbit">
+      <div className="sync-particle p1"></div>
+      <div className="sync-particle p2"></div>
+    </div>
+  </div>
+  <span className="logo-brand">SYNC</span>
+</div>
+        <div className="nav-actions">
+          {user?.isLoggedIn ? (
+            <div className="nav-user-area">
+              <div className="user-profile-pill">
+                <div className="nav-avatar-circle">
+                  {getDisplayName().charAt(0)}
+                </div>
+                <span className="nav-display-name">{getDisplayName()}</span>
+              </div>
+              <button className="nav-logout-minimal" onClick={handleLogout}>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 01-2-2h4"></path>
+                  <polyline points="16 17 21 12 16 7"></polyline>
+                  <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                <span>Logout</span>
+              </button>
             </div>
-            <button className="logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/signin" className="nav-link">
-              Sign In
-            </Link>
-            <Link to="/signup" className="nav-link">
-              Sign Up
-            </Link>
-          </>
-        )}
+          ) : (
+            <div className="nav-auth-links">
+              <Link to="/signin" className="nav-link-subtle">
+                Sign In
+              </Link>
+              <Link to="/signup" className="nav-link-cta">
+                Get Started
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );

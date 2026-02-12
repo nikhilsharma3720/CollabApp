@@ -10,7 +10,6 @@ export default function Board() {
   const [boards, setBoards] = useState([]);
   const [activeModalBoard, setActiveModalBoard] = useState(null);
   const [newBoardTitle, setNewBoardTitle] = useState("");
-
   const [draggedBoardIndex, setDraggedBoardIndex] = useState(null);
   const [isCreating, setIsCreating] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -21,24 +20,18 @@ export default function Board() {
   const teamJoinCode = localStorage.getItem("teamJoinCode");
   const user = useSelector((state) => state.user);
 
-  /* ================= FETCH BOARDS ================= */
   const fetchBoardsByTeam = useCallback(async () => {
     if (!teamId) return;
     setLoading(true);
     try {
-      const res = await api.get(`/boards/fetchByTeamId/${teamId}`, {
-        withCredentials: true,
-      });
-      // Extract array correctly based on your backend response structure
-      const boardData = Array.isArray(res.data)
-        ? res.data
-        : res.data.boards || [];
+      const res = await api.get(`/boards/fetchByTeamId/${teamId}`, { withCredentials: true });
+      const boardData = Array.isArray(res.data) ? res.data : res.data.boards || [];
       setBoards(boardData);
     } catch (err) {
-      console.error("Failed to fetch boards:", err);
       toast.error("Failed to load boards");
     } finally {
-      setLoading(false);
+      // Small timeout to let the skeleton shine
+      setTimeout(() => setLoading(false), 800);
     }
   }, [teamId]);
 
@@ -46,87 +39,35 @@ export default function Board() {
     fetchBoardsByTeam();
   }, [fetchBoardsByTeam]);
 
-  /* ================= CONSOLIDATED SOCKET.IO LOGIC ================= */
   useEffect(() => {
     if (!teamId || !user?.id) return;
-
     const roomName = `team:${teamId}`;
+    socket.emit("joinTeam", { teamId: roomName, user: { _id: user.id, name: user.name, email: user.email } });
 
-    // Join room with full user data
-    socket.emit("joinTeam", {
-      teamId: roomName,
-      user: { _id: user.id, name: user.name, email: user.email },
-    });
-
-    // Handle board creation from others
     socket.on("board-created", (newBoard) => {
-      setBoards((prev) => {
-        if (prev.some((b) => b._id === newBoard._id)) return prev;
-        if (newBoard.createdBy?._id !== user.id) {
-          toast.success(
-            `${newBoard.createdBy?.name || "Teammate"} created a board`,
-            { icon: "🚀" },
-          );
-        }
-        return [...prev, newBoard];
-      });
+      setBoards((prev) => (prev.some(b => b._id === newBoard._id) ? prev : [...prev, newBoard]));
     });
 
-    // Handle board deletion
-    socket.on("board-deleted", ({ boardId, deletedBy }) => {
-      if (deletedBy?.email !== user.email) {
-        toast.error(`${deletedBy?.name || "Teammate"} deleted a board`);
-      }
+    socket.on("board-deleted", ({ boardId }) => {
       setBoards((prev) => prev.filter((b) => b._id !== boardId));
-      setActiveModalBoard((prev) => (prev === boardId ? null : prev));
     });
 
-    // Handle new notes
-    socket.on("note-added", ({ boardId, note }) => {
-      if (note.user?.email !== user.email) {
-        toast(`${note.user?.name || "Teammate"} added a note`, { icon: "📝" });
-      }
-      setBoards((prev) =>
-        prev.map((b) =>
-          b._id === boardId
-            ? {
-                ...b,
-                notes: [...b.notes.filter((n) => n._id !== note._id), note],
-              }
-            : b,
-        ),
-      );
-    });
-
-    // Handle online user count
     socket.on("team-users-count", (data) => {
-      const count = Array.isArray(data) ? data.length : data;
-      setOnlineUsers(count);
+      setOnlineUsers(Array.isArray(data) ? data.length : data);
     });
 
-    // Cleanup listeners on unmount or dependency change
     return () => {
       socket.off("board-created");
       socket.off("board-deleted");
-      socket.off("note-added");
-      socket.off("note-deleted");
       socket.off("team-users-count");
     };
   }, [teamId, user]);
 
-  /* ================= HANDLERS ================= */
   const handleAddBoard = async () => {
     if (!newBoardTitle.trim() || isCreating) return;
     setIsCreating(true);
     try {
-      // Just make the API call.
-      // The socket listener "board-created" below will handle adding it to the UI.
-      await api.post(
-        "/boards",
-        { title: newBoardTitle, teamId },
-        { withCredentials: true },
-      );
-
+      await api.post("/boards", { title: newBoardTitle, teamId }, { withCredentials: true });
       setNewBoardTitle("");
       toast.success("Board created!");
     } catch (err) {
@@ -137,105 +78,98 @@ export default function Board() {
   };
 
   const copyToClipboard = () => {
-    if (!teamJoinCode) return;
     navigator.clipboard.writeText(teamJoinCode);
     toast.success("Invite code copied!");
   };
 
-  const updateBoardNotes = (boardId, newNotes) => {
-    setBoards((prev) =>
-      prev.map((b) => (b._id === boardId ? { ...b, notes: newNotes } : b)),
-    );
-  };
-
-  /* ================= DRAG & DROP ================= */
-  const handleBoardDragStart = (e, index) => setDraggedBoardIndex(index);
-  const handleBoardDrop = (dropIndex) => {
-    if (draggedBoardIndex === null || draggedBoardIndex === dropIndex) return;
-    const reordered = [...boards];
-    const [moved] = reordered.splice(draggedBoardIndex, 1);
-    reordered.splice(dropIndex, 0, moved);
-    setBoards(reordered);
-    setDraggedBoardIndex(null);
-  };
-
   return (
     <div className="app-wrapper">
-      <header className="app-header">
-        <div className="header-text">
-          <div className="title-row">
-            <h2>{teamName}</h2>
-            <div className="online-pill">
-              <span className="pulse-dot"></span>
-              {onlineUsers} online
+      <header className="workspace-header">
+        <div className="header-main">
+          {/* LEFT SIDE: Team Context */}
+          <div className="workspace-left">
+            <div className="breadcrumb">Workspace / <strong>{teamName}</strong></div>
+            <div className="title-row">
+              <h1>{teamName}</h1>
+              <div className="online-indicator">
+                <span className="pulse-dot"></span>
+                {onlineUsers} Active Now
+              </div>
             </div>
           </div>
 
-          <p className="welcome-sub">
-            Welcome back, <strong>{user?.name || "User"}</strong>.
-          </p>
-
-          {teamJoinCode && (
-            <div className="team-info-row">
-              <span className="join-code-badge">
-                Invite Code: <code>{teamJoinCode}</code>
-              </span>
-              <button className="copy-btn" onClick={copyToClipboard}>
-                Copy
+          {/* RIGHT SIDE: Beautiful Tools */}
+          <div className="workspace-right">
+            {teamJoinCode && (
+              <div className="invite-pill" onClick={copyToClipboard}>
+                <span className="pill-label">Invite Code:</span>
+                <span className="pill-value">{teamJoinCode}</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+              </div>
+            )}
+            <div className="v-divider"></div>
+            <div className="board-input-wrapper">
+              <input
+                type="text"
+                placeholder="New board name..."
+                value={newBoardTitle}
+                onChange={(e) => setNewBoardTitle(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleAddBoard()}
+              />
+              <button onClick={handleAddBoard} disabled={isCreating}>
+                {isCreating ? "..." : "Create"}
               </button>
             </div>
-          )}
-        </div>
-
-        <div className="add-board-controls">
-          <input
-            type="text"
-            placeholder="Board Title (e.g. Q1 Marketing)"
-            value={newBoardTitle}
-            onChange={(e) => setNewBoardTitle(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleAddBoard()}
-            className="new-board-input"
-          />
-          <button
-            onClick={handleAddBoard}
-            className="new-board-btn"
-            disabled={isCreating}
-          >
-            {isCreating ? "..." : "Create Board"}
-          </button>
+          </div>
         </div>
       </header>
 
-      <main className="board-container">
+      <main className="boards-scroll-area">
         {loading ? (
-          <div className="status-message">Loading workspace...</div>
+          <div className="boards-flex-container">
+            {[...Array(4)].map((i) => (
+              <div key={i} className="board-outer-wrap">
+        <div className="skeleton-board">
+          <div className="skeleton-header"></div>
+          <div className="skeleton-note"></div>
+          <div className="skeleton-note"></div>
+          <div className="skeleton-note"></div>
+          <div className="skeleton-note" style={{height: '40px', marginTop: 'auto'}}></div> 
+        </div>
+      </div>
+            ))}
+          </div>
         ) : boards.length > 0 ? (
-          boards.map((board, index) => (
-            <div
-              key={board._id}
-              draggable
-              onDragStart={(e) => handleBoardDragStart(e, index)}
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={() => handleBoardDrop(index)}
-              className={`board-wrapper ${draggedBoardIndex === index ? "is-dragging" : ""}`}
-            >
-              <BoardCard
-                board={board}
-                setBoards={setBoards}
-                isModalOpen={activeModalBoard === board._id}
-                setActiveModalBoard={setActiveModalBoard}
-                updateBoardNotes={updateBoardNotes}
-              />
-            </div>
-          ))
+          <div className="boards-flex-container">
+            {boards.map((board, index) => (
+              <div
+                key={board._id}
+                draggable
+                onDragStart={() => setDraggedBoardIndex(index)}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={() => {
+                  const reordered = [...boards];
+                  const [moved] = reordered.splice(draggedBoardIndex, 1);
+                  reordered.splice(index, 0, moved);
+                  setBoards(reordered);
+                }}
+                className={`board-outer-wrap ${draggedBoardIndex === index ? "is-ghost" : ""}`}
+              >
+                <BoardCard
+                  board={board}
+                  setBoards={setBoards}
+                  isModalOpen={activeModalBoard === board._id}
+                  setActiveModalBoard={setActiveModalBoard}
+                  updateBoardNotes={(id, notes) => setBoards(prev => prev.map(b => b._id === id ? {...b, notes} : b))}
+                />
+              </div>
+            ))}
+          </div>
         ) : (
-          <div className="empty-state-container">
-            <div className="empty-state-icon">📂</div>
-            <h3 className="empty-state-title">No boards found</h3>
-            <p className="empty-state-description">
-              Your team hasn't created any boards yet. Start one above!
-            </p>
-            <div className="empty-state-arrow">↑</div>
+          <div className="modern-empty-state">
+            <div className="empty-icon-wrap">📂</div>
+            <h2>Clean slate</h2>
+            <p>Ready to start something new? Create your first board above.</p>
           </div>
         )}
       </main>

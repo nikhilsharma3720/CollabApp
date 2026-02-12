@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,11 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,10 +25,8 @@ export default function SignIn() {
     setLoading(true);
     try {
       const res = await api.post("/signin", { email, password });
-
       dispatch(setUser(res.data.user));
       localStorage.setItem("user", JSON.stringify(res.data.user));
-
       toast.success(`Welcome back, ${res.data.user.name || "User"}!`);
       navigate("/createAndJoin");
     } catch (err) {
@@ -35,53 +38,58 @@ export default function SignIn() {
   };
 
   return (
-    <div className="auth-wrapper">
-      <div className="auth-card">
-        <div className="auth-header">
-          <div className="auth-logo-circle">C</div>
-          <h2>Welcome Back</h2>
-          <p>Sign in to continue to your workspace</p>
+    <div className="auth-screen">
+      {/* LEFT SIDE: Brand Visual */}
+      <div className="auth-visual-side">
+        <div className="gradient-sphere"></div>
+        <div className={`visual-content-wrapper ${isVisible ? "slide-in" : ""}`}>
+          <div className="brand-badge">Welcome Back</div>
+          <h1>Focus on <br /><span>what matters.</span></h1>
+          <p>Log in to access your projects and continue where you left off with your team.</p>
         </div>
+        <div className="glass-shape s1"></div>
+        <div className="glass-shape s2"></div>
+      </div>
 
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              placeholder="name@company.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="auth-input"
-            />
+      {/* RIGHT SIDE: Login Form */}
+      <div className="auth-form-side">
+        <div className={`form-container ${isVisible ? "fade-in" : ""}`}>
+          <div className="form-header">
+            <h2>Sign In</h2>
+            <p>Welcome back! Please enter your details.</p>
           </div>
 
-          <div className="input-group">
-            <div className="label-row">
-              <label>Password</label>
+          <form onSubmit={handleSubmit} noValidate>
+            <div className="input-field">
+              <label>Email Address</label>
+              <input
+                type="email"
+                placeholder="name@company.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
-            <input
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="auth-input"
-            />
-          </div>
 
-          <button type="submit" className="auth-btn" disabled={loading}>
-            {loading ? (
-              <span className="loader-dots">Logging in...</span>
-            ) : (
-              "Sign In"
-            )}
-          </button>
-        </form>
+            <div className="input-field">
+              <div className="label-row" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <label>Password</label>
+               </div>
+              <input
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-        <div className="form-footer">
-          New to CollabApp?{" "}
-          <Link to="/signup" className="signup-link">
-            Create an account
-          </Link>
+            <button type="submit" className="submit-btn" disabled={loading}>
+              {loading ? "Authenticating..." : "Sign In"}
+            </button>
+          </form>
+
+          <p className="switch-auth">
+            New to CollabApp? <Link to="/signup">Create an account</Link>
+          </p>
         </div>
       </div>
     </div>

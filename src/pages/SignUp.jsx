@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
 import toast from "react-hot-toast";
@@ -9,103 +9,93 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    let hasError = false;
-
-    if (!name.trim()) {
-      toast.error("Full Name is required");
-      hasError = true;
+    if (!name || !email || !password) {
+      toast.error("Please fill in all fields");
+      return;
     }
-
-    if (!email.trim()) {
-      toast.error("Email Address is required");
-      hasError = true;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      toast.error("Please enter a valid email");
-      hasError = true;
-    }
-
-    if (!password) {
-      toast.error("Password is required");
-      hasError = true;
-    } else if (password.length < 8) {
-      toast.error("Password must be at least 8 characters");
-      hasError = true;
-    }
-
-    if (hasError) return;
 
     setLoading(true);
     try {
       await api.post("/signup", { name, email, password });
-      toast.success("Account created successfully! Please sign in.");
+      toast.success("Connection Established!"); // Rebranded toast
       navigate("/signin");
     } catch (err) {
-      const msg =
-        err.response?.data?.message || "Signup failed. Try a different email.";
-      toast.error(msg);
+      toast.error(err.response?.data?.message || "Signup failed");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="auth-wrapper">
-      <div className="auth-card">
-        <div className="auth-header">
-          <div className="auth-logo-circle">C</div>
-          <h2>Create Account</h2>
-          <p>Join CollabApp and start organizing today.</p>
+    <div className="auth-screen">
+      {/* LEFT: Rebranded with 'Sync' content but same classes */}
+      <div className="auth-visual-side">
+        <div className="gradient-sphere"></div>
+        <div className={`visual-content-wrapper ${isVisible ? "slide-in" : ""}`}>
+          <div className="brand-badge">Build v1.0 • Dev Edition</div>
+          <h1>Engineered for <br /><span>Real-time.</span></h1>
+          <p>A personal exploration of WebSocket architecture and modern state management. Sync your thoughts.</p>
         </div>
+        <div className="glass-shape s1"></div>
+        <div className="glass-shape s2"></div>
+      </div>
 
-        <form className="auth-form" onSubmit={handleSubmit} noValidate>
-          <div className="input-group">
-            <label>Full Name</label>
-            <input
-              className={`auth-input ${!name && "input-error"}`}
-              type="text"
-              placeholder="e.g. John Doe"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+      {/* RIGHT: Same classes, updated labels and text */}
+      <div className="auth-form-side">
+        <div className={`form-container ${isVisible ? "fade-in" : ""}`}>
+          <div className="form-header">
+            {/* Added a simple SYNC text logo here inside your existing header */}
+            <div style={{fontWeight: '900', letterSpacing: '0.4em', color: '#7c3aed', marginBottom: '10px'}}>SYNC</div>
+            <h2>Initialize Account</h2>
+            <p>Step into your live workspace.</p>
           </div>
 
-          <div className="input-group">
-            <label>Email Address</label>
-            <input
-              className={`auth-input ${!email && "input-error"}`}
-              type="email"
-              placeholder="name@company.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+          <form onSubmit={handleSubmit} noValidate>
+            <div className="input-field">
+              <label>Identity</label>
+              <input 
+                type="text" 
+                placeholder="Your full name" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="input-field">
+              <label>System Email</label>
+              <input 
+                type="email" 
+                placeholder="name@provider.com" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="input-field">
+              <label>Access Key</label>
+              <input 
+                type="password" 
+                placeholder="Secure password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-          <div className="input-group">
-            <label>Password</label>
-            <input
-              className={`auth-input ${password.length < 8 && password.length > 0 && "input-error"}`}
-              type="password"
-              placeholder="Min. 8 characters"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+            <button type="submit" className="submit-btn" disabled={loading}>
+              {loading ? "Establishing Link..." : "Join Workspace"}
+            </button>
+          </form>
 
-          <button type="submit" className="auth-btn" disabled={loading}>
-            {loading ? "Creating Account..." : "Create Account"}
-          </button>
-        </form>
-
-        <div className="form-footer">
-          Already have an account?{" "}
-          <Link to="/signin" className="signup-link">
-            Sign In
-          </Link>
+          <p className="switch-auth">
+            Already Synced? <Link to="/signin">Sign In</Link>
+          </p>
         </div>
       </div>
     </div>

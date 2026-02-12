@@ -3,6 +3,7 @@ import "../App.css";
 import NoteCard from "./NoteCard";
 import api from "../api/axios";
 import socket from "../../socket";
+
 export default function BoardCard({
   board,
   isModalOpen,
@@ -25,7 +26,6 @@ export default function BoardCard({
   }, [notes, isModalOpen]);
 
   /* ================= NOTE DRAG & DROP ================= */
-
   const handleNoteDragStart = (e, index) => {
     e.stopPropagation();
     setDraggedNoteIndex(index);
@@ -44,92 +44,67 @@ export default function BoardCard({
     setDraggedNoteIndex(null);
   };
 
-  /* ================= ADD NOTE ================= */
-
+  /* ================= ACTIONS ================= */
   const handleAddNote = async () => {
     if (!newNote.trim()) return;
-
     const content = newNote;
     setNewNote("");
     setActiveModalBoard(null);
-
     try {
-      await api.post(
-        `/boards/${board._id}/notes`,
-        { content },
-        { withCredentials: true },
-      );
+      await api.post(`/boards/${board._id}/notes`, { content }, { withCredentials: true });
     } catch (err) {
-      alert("Failed to add note");
+      console.error("Failed to add note");
     }
   };
 
-  /* ================= DELETE BOARD ================= */
-
   const handleDeleteBoard = async () => {
+    
     try {
       setBoards((prev) => prev.filter((b) => b._id !== board._id));
       await api.delete(`/boards/${board._id}`, { withCredentials: true });
     } catch (err) {
-      alert("Failed to delete board");
+      console.error("Failed to delete board");
     }
   };
+
+  /* ================= SOCKETS ================= */
   useEffect(() => {
     const handleNoteAdded = ({ boardId, note }) => {
       setBoards((prevBoards) =>
-        prevBoards.map((board) => {
-          if (board._id !== boardId) return board;
-
-          const alreadyExists = board.notes.some((n) => n._id === note._id);
-
-          if (alreadyExists) return board;
-
-          return {
-            ...board,
-            notes: [...board.notes, note],
-          };
-        }),
+        prevBoards.map((b) => {
+          if (b._id !== boardId) return b;
+          if (b.notes.some((n) => n._id === note._id)) return b;
+          return { ...b, notes: [...b.notes, note] };
+        })
       );
     };
-
     socket.on("note-added", handleNoteAdded);
-
-    return () => {
-      socket.off("note-added", handleNoteAdded);
-    };
-  }, []);
+    return () => socket.off("note-added", handleNoteAdded);
+  }, [setBoards]);
 
   useEffect(() => {
     const handleNoteDeleted = ({ boardId, noteId }) => {
       setBoards((prevBoards) =>
-        prevBoards.map((board) => {
-          if (board._id !== boardId) return board;
-
-          return {
-            ...board,
-            notes: board.notes.filter((note) => note._id !== noteId),
-          };
-        }),
+        prevBoards.map((b) => (b._id === boardId ? { ...b, notes: b.notes.filter(n => n._id !== noteId) } : b))
       );
     };
-
     socket.on("note-deleted", handleNoteDeleted);
-
-    return () => {
-      socket.off("note-deleted", handleNoteDeleted);
-    };
-  }, []);
+    return () => socket.off("note-deleted", handleNoteDeleted);
+  }, [setBoards]);
 
   return (
-    <div className="board-card">
+    <div className={`modern-board-card ${isModalOpen ? "active-ring" : ""}`}>
       <div className="board-header">
-        <h3>{board.title}</h3>
-        <button className="delete-board-btn" onClick={handleDeleteBoard}>
-          🗑️
+        <div className="board-title-group">
+          <div className="board-dot"></div>
+          <h3>{board.title}</h3>
+        </div>
+        <button className="board-more-btn" onClick={handleDeleteBoard} title="Delete Board">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg>
         </button>
       </div>
 
-      <div className="notes-container" ref={notesContainerRef}>
+      <div className="board-notes-list" ref={notesContainerRef}>
         {notes.length > 0 ? (
           notes.map((note, index) => (
             <div
@@ -138,27 +113,24 @@ export default function BoardCard({
               onDragStart={(e) => handleNoteDragStart(e, index)}
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => handleNoteDrop(e, index)}
-              className={`note-wrapper ${
-                draggedNoteIndex === index ? "dragging-note" : ""
-              }`}
+              className={`note-draggable-wrapper ${draggedNoteIndex === index ? "is-dragging" : ""}`}
             >
               <NoteCard boardId={board._id} note={note} setBoards={setBoards} />
             </div>
           ))
         ) : !isModalOpen ? (
-          <div className="empty-notes-placeholder">
-            <div className="placeholder-icon">📝</div>
+          <div className="empty-state">
             <p>No notes yet</p>
           </div>
         ) : null}
 
         {isModalOpen && (
-          <div className="inline-modal">
+          <div className="modern-inline-modal">
             <textarea
-              className="minimal-textarea"
+              className="modern-textarea"
               value={newNote}
               onChange={(e) => setNewNote(e.target.value)}
-              placeholder="Type your note here..."
+              placeholder="What's on your mind?"
               autoFocus
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
@@ -167,27 +139,17 @@ export default function BoardCard({
                 }
               }}
             />
-            <div className="modal-actions-row">
-              <button
-                className="btn-discard"
-                onClick={() => setActiveModalBoard(null)}
-              >
-                Cancel
-              </button>
-              <button className="btn-add-primary" onClick={handleAddNote}>
-                Add Note
-              </button>
+            <div className="modal-actions">
+              <button className="btn-text" onClick={() => setActiveModalBoard(null)}>Cancel</button>
+              <button className="btn-primary-sm" onClick={handleAddNote}>Add</button>
             </div>
           </div>
         )}
       </div>
 
       {!isModalOpen && (
-        <button
-          className="add-note-btn"
-          onClick={() => setActiveModalBoard(board._id)}
-        >
-          + Add Note
+        <button className="add-note-trigger" onClick={() => setActiveModalBoard(board._id)}>
+          <span className="plus-icon">+</span> Add a note
         </button>
       )}
     </div>
