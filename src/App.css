@@ -73,7 +73,6 @@
   transform: translateY(-1px);
 }
 
-
 /* ---------- Boards Container ---------- */
 .board-container {
   display: flex;
@@ -105,12 +104,12 @@
 
 /* Notes container scroll */
 .notes-container {
-  min-height: 60px;        /* 🔥 REQUIRED */
+  min-height: 60px; /* 🔥 REQUIRED */
   max-height: 300px;
   overflow-y: auto;
   margin-top: 10px;
   padding: 4px;
-  background: #ffffff;    /* 🔥 so you can SEE it */
+  background: #ffffff; /* 🔥 so you can SEE it */
   border-radius: 6px;
 }
 
@@ -119,7 +118,7 @@
   background-color: #fff8dc; /* light cream */
   border-radius: 5px;
   padding: 8px;
-   background: #f1f5f9;
+  background: #f1f5f9;
   padding: 8px;
   border-radius: 6px;
   margin-bottom: 8px;
@@ -278,9 +277,6 @@
   border-radius: 3px;
 }
 
-
-
-
 .board-card {
   position: relative;
   background: #ffffff;
@@ -311,22 +307,15 @@
   font-size: 16px;
   padding: 4px;
   color: #888;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .delete-board-btn:hover {
   color: #e53935;
   transform: scale(1.15);
 }
-
-
-
-
-
-
-
-
-
 
 :root {
   --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -335,14 +324,18 @@
   --text-primary: #0f172a;
   --text-secondary: #64748b;
   --radius: 16px;
-  --shadow-elegant: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --shadow-elegant:
+    0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   background: var(--bg-gradient);
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    sans-serif;
   color: var(--text-primary);
 }
 
@@ -430,14 +423,14 @@ body {
   opacity: 0.9;
 }
 
-
 :root {
   --accent-indigo: #6366f1;
   --danger-rose: #f43f5e;
   --glass-white: rgba(255, 255, 255, 0.85);
   --text-main: #1e293b;
   --text-muted: #64748b;
-  --shadow-soft: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-soft:
+    0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
 }
 
 /* Container logic - Centers everything */
@@ -551,11 +544,6 @@ body {
   color: var(--text-main) !important;
 }
 
-
-
-
-
-
 .empty-notes-placeholder {
   display: flex;
   flex-direction: column;
@@ -627,7 +615,9 @@ body {
   cursor: pointer;
   /* Transition for multiple properties */
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .new-board-btn:hover {
@@ -672,7 +662,9 @@ body {
 
 /* Wrapper to handle board-level drag events */
 .board-wrapper {
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
   cursor: grab;
 }
 
@@ -697,29 +689,12 @@ body {
   width: 100%; /* Ensure it takes full width */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Container & Layout */
 .team-page-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .team-selection-grid {
@@ -792,7 +767,7 @@ body {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .divider {
     padding: 20px 0;
   }
@@ -801,21 +776,6 @@ body {
     width: 100%;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* --- Header Text Container --- */
 .header-text {
@@ -875,7 +835,7 @@ body {
   padding: 2px 8px;
   border-radius: 4px;
   margin-left: 6px;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
 }
 
 /* --- Copy Code Button --- */
@@ -903,47 +863,39 @@ body {
   transform: scale(0.95);
 }
 
-
-
-
-
 /* The container for input and button */
 .add-board-controls {
   display: flex;
-  flex-wrap: wrap;       /* Allows items to move to the next line if cramped */
-  gap: 10px;             /* Keeps a consistent distance between them */
+  flex-wrap: wrap; /* Allows items to move to the next line if cramped */
+  gap: 10px; /* Keeps a consistent distance between them */
   width: 100%;
-  max-width: 500px;      /* Matches your desktop design */
+  max-width: 500px; /* Matches your desktop design */
   align-items: center;
 }
 
 .new-board-input {
-  flex: 1;               /* Takes up remaining space */
-  min-width: 200px;      /* Prevents the input from becoming too tiny */
+  flex: 1; /* Takes up remaining space */
+  min-width: 200px; /* Prevents the input from becoming too tiny */
   box-sizing: border-box; /* Ensures padding doesn't cause overflow */
 }
 
 .new-board-btn {
-  flex-shrink: 0;        /* Prevents the button from squishing */
-  white-space: nowrap;   /* Keeps "Create Board" on one single line */
+  flex-shrink: 0; /* Prevents the button from squishing */
+  white-space: nowrap; /* Keeps "Create Board" on one single line */
 }
 
 /* --- Mobile Specific Adjustment --- */
 @media (max-width: 480px) {
   .add-board-controls {
     flex-direction: column; /* Stacks input on top of button */
-    align-items: stretch;   /* Makes both the same width */
+    align-items: stretch; /* Makes both the same width */
   }
 
-  .new-board-input, 
+  .new-board-input,
   .new-board-btn {
-    width: 100%;           /* Ensures full width on small phones */
+    width: 100%; /* Ensures full width on small phones */
   }
 }
-
-
-
-
 
 .empty-state-container {
   display: flex;
@@ -989,27 +941,20 @@ body {
 }
 
 @keyframes bounceUp {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .title-row {
   display: flex;
@@ -1049,11 +994,16 @@ body {
 }
 
 @keyframes pulse-ring {
-  0% { transform: scale(0.8); opacity: 0.5; }
-  80%, 100% { transform: scale(2.8); opacity: 0; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  80%,
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
 }
-
-
 
 /* --- Modern Board Card --- */
 .modern-board-card {
@@ -1170,7 +1120,9 @@ body {
   min-height: 60px;
 }
 
-.modern-textarea:focus { outline: none; }
+.modern-textarea:focus {
+  outline: none;
+}
 
 .modal-actions {
   display: flex;
@@ -1228,7 +1180,6 @@ body {
   font-size: 1.1rem;
 }
 
-
 /* --- Workspace Layout --- */
 .workspace-layout {
   padding-top: 80px; /* Space for fixed navbar */
@@ -1285,9 +1236,15 @@ body {
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-  70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
 }
 
 /* Header Actions */
@@ -1316,7 +1273,9 @@ body {
   transition: all 0.2s;
 }
 
-.invite-pill:hover { background: #dbeafe; }
+.invite-pill:hover {
+  background: #dbeafe;
+}
 
 /* New Board Input */
 .board-input-wrapper {
@@ -1383,10 +1342,10 @@ body {
 .boards-scroll-area {
   padding: 30px 40px;
   /* Allow horizontal scrolling */
-  overflow-x: auto; 
+  overflow-x: auto;
   overflow-y: hidden;
   /* Ensure it takes up the remaining screen height */
-  height: calc(100vh - 180px); 
+  height: calc(100vh - 180px);
   display: flex;
   align-items: flex-start;
 }
@@ -1395,17 +1354,17 @@ body {
 .boards-flex-container {
   display: flex;
   flex-direction: row; /* Force them in a line */
-  gap: 24px;           /* Space between boards */
+  gap: 24px; /* Space between boards */
   align-items: flex-start;
   /* Crucial: Prevent the container from shrinking */
-  min-width: min-content; 
+  min-width: min-content;
   padding-bottom: 20px; /* Space for the scrollbar */
 }
 
 /* Ensure each board has a fixed width so they don't squish */
 .board-outer-wrap {
-  width: 320px;        /* Fixed width for every board */
-  flex-shrink: 0;      /* DO NOT let boards get smaller */
+  width: 320px; /* Fixed width for every board */
+  flex-shrink: 0; /* DO NOT let boards get smaller */
   height: 100%;
 }
 
@@ -1416,7 +1375,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; /* Centers everything horizontally */
-  text-align: center;  /* Centers the text inside */
+  text-align: center; /* Centers the text inside */
   gap: 16px;
 }
 
@@ -1465,14 +1424,13 @@ body {
   width: 250px; /* Slightly wider for better balance in the middle */
 }
 
-
 @media (max-width: 768px) {
   /* 1. Reset the scroll area to allow vertical growth */
   .boards-scroll-area {
     padding: 20px 16px;
     overflow-x: hidden; /* Disable horizontal scroll */
-    overflow-y: visible; 
-    height: auto; 
+    overflow-y: visible;
+    height: auto;
     display: block; /* Remove flex constraints */
   }
 
@@ -1511,7 +1469,6 @@ body {
     width: 100%;
   }
 }
-
 
 .workspace-header {
   background: #ffffff;
@@ -1576,8 +1533,16 @@ body {
   transition: all 0.2s;
 }
 
-.pill-label { font-size: 0.7rem; color: #64748b; font-weight: 600; }
-.pill-value { font-size: 0.8rem; color: #0f172a; font-weight: 700; }
+.pill-label {
+  font-size: 0.7rem;
+  color: #64748b;
+  font-weight: 600;
+}
+.pill-value {
+  font-size: 0.8rem;
+  color: #0f172a;
+  font-weight: 700;
+}
 
 .v-divider {
   width: 1px;
@@ -1614,35 +1579,46 @@ body {
 
 /* Responsive: Stack only on small mobile */
 @media (max-width: 1024px) {
-  .workspace-header { padding: 12px 16px; }
-  .invite-pill .pill-label { display: none; } /* Hide label to save space */
+  .workspace-header {
+    padding: 12px 16px;
+  }
+  .invite-pill .pill-label {
+    display: none;
+  } /* Hide label to save space */
 }
 
 @media (max-width: 768px) {
-  .header-main { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .v-divider { display: none; }
-  .workspace-right { width: 100%; justify-content: space-between; }
+  .header-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .v-divider {
+    display: none;
+  }
+  .workspace-right {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
-
-
 
 .workspace-header {
   /* Use semi-transparent white */
-  background: rgba(255, 255, 255, 0.7); 
-  
+  background: rgba(255, 255, 255, 0.7);
+
   /* The "Magic" ingredient: Blur whatever is behind it */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  
+
   /* Remove the hard line and use a very soft shadow instead */
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  
+
   padding: 16px 32px;
   position: sticky;
-  top: 72px; 
+  top: 72px;
   z-index: 100;
-  
+
   /* Smooth transition if you change colors */
   transition: all 0.3s ease;
 }
@@ -1657,7 +1633,7 @@ body {
   font-size: 1.5rem;
   letter-spacing: -0.5px;
   /* Use a slightly softer black for a premium feel */
-  color: #0f172a; 
+  color: #0f172a;
 }
 
 /* Tweak the action buttons to look more "UI" and less "Website" */
@@ -1670,10 +1646,8 @@ body {
 .board-input-wrapper {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
-
-
 
 .workspace-header {
   position: sticky;
@@ -1683,11 +1657,12 @@ body {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  
+
   /* The "Beautiful" part: a very subtle bottom glow */
   border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 
-              0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  box-shadow:
+    0 10px 30px -10px rgba(0, 0, 0, 0.04),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
 }
 
 .header-main {
@@ -1749,7 +1724,7 @@ body {
   padding: 4px;
   border-radius: 14px;
   display: flex;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .board-input-wrapper button {
@@ -1760,7 +1735,7 @@ body {
 .modern-board-card {
   background: #ffffff;
   /* Classy: No heavy shadows, just a light border */
-  border: 1px solid #f1f5f9; 
+  border: 1px solid #f1f5f9;
   border-radius: 20px;
   padding: 12px;
   transition: all 0.3s ease;
@@ -1786,7 +1761,7 @@ body {
 .note-card {
   background: #ffffff !important; /* Remove bright colors */
   border: 1px solid #f1f5f9 !important;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.02) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02) !important;
   border-radius: 12px !important;
   color: #64748b !important;
 }
@@ -1794,7 +1769,7 @@ body {
   .workspace-header {
     padding: 20px 16px;
     /* Allow the header to grow vertically so text doesn't overlap */
-    height: auto; 
+    height: auto;
   }
 
   .header-main {
@@ -1841,13 +1816,6 @@ body {
   }
 }
 
-
-
-
-
-
-
-
 /* --- Skeleton Loading State --- */
 .skeleton-board {
   width: 100%;
@@ -1861,13 +1829,9 @@ body {
   gap: 15px;
 }
 
-.skeleton-header, .skeleton-note {
-  background: linear-gradient(
-    90deg,
-    #f8fafc 25%,
-    #f1f5f9 50%,
-    #f8fafc 75%
-  );
+.skeleton-header,
+.skeleton-note {
+  background: linear-gradient(90deg, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite linear;
   border-radius: 8px;
@@ -1885,8 +1849,12 @@ body {
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .workspace-header {
@@ -1894,15 +1862,15 @@ body {
   top: 72px; /* Ensure this matches your Navbar height */
   z-index: 100;
   width: 100%;
-  
+
   /* Increased Padding for more "Air" */
-  padding: 32px 48px; 
-  
+  padding: 32px 48px;
+
   /* Enhanced Glassmorphism */
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  
+
   /* Soft Bottom Shadow instead of a hard line */
   border-bottom: 1px solid rgba(226, 232, 240, 0.6);
   box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.05);
@@ -1913,7 +1881,7 @@ body {
   justify-content: space-between;
   align-items: center;
   /* Allow it to be wide, but not infinite */
-  max-width: 1800px; 
+  max-width: 1800px;
   margin: 0 auto;
 }
 
@@ -1975,8 +1943,12 @@ body {
   border-color: #cbd5e1;
 }
 
-.pill-label { font-size: 0.8rem; }
-.pill-value { font-size: 1rem; }
+.pill-label {
+  font-size: 0.8rem;
+}
+.pill-value {
+  font-size: 1rem;
+}
 
 /* Enhanced Input Wrapper */
 .board-input-wrapper {
@@ -2015,7 +1987,6 @@ body {
   width: 2px; /* Slightly thicker */
   background: #f1f5f9;
 }
-
 
 /* --- Base Styles for Desktop (Commanding & Large) --- */
 .workspace-header {
@@ -2074,7 +2045,8 @@ body {
   }
 
   /* 3. Make Invite and Input stretch to full width */
-  .invite-pill, .board-input-wrapper {
+  .invite-pill,
+  .board-input-wrapper {
     width: 100%;
     justify-content: space-between;
   }
@@ -2107,7 +2079,6 @@ body {
   }
 }
 
-
 @media (max-width: 768px) {
   /* 1. Reset the main container to remove extra padding that squeezes the card */
   .boards-scroll-area {
@@ -2131,7 +2102,7 @@ body {
   .modern-board-card {
     width: 100%;
     min-height: 300px; /* Give it enough height to look like a board */
-    max-height: 80vh;  /* Prevent it from being taller than the screen */
+    max-height: 80vh; /* Prevent it from being taller than the screen */
     border-radius: 24px; /* Rounder corners for a high-end feel */
     border: 1px solid #f1f5f9;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
@@ -2145,7 +2116,7 @@ body {
     overflow-y: auto;
     padding: 10px 4px;
     /* Hide scrollbar for a cleaner look */
-    scrollbar-width: none; 
+    scrollbar-width: none;
   }
 
   /* 4. Increase tap targets for mobile fingers */
@@ -2192,7 +2163,7 @@ body {
 
   .board-outer-wrap {
     /* Set width to exactly 95% of the viewport */
-    width: 95% !important; 
+    width: 95% !important;
     max-width: none; /* Remove any desktop desktop constraints */
     margin: 0 auto;
     flex-shrink: 0;
@@ -2201,7 +2172,7 @@ body {
   .modern-board-card {
     width: 100%;
     /* Optimization for mobile: ensure it feels solid */
-    border: 1.5px solid #f1f5f9; 
+    border: 1.5px solid #f1f5f9;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
   }
 
@@ -2215,15 +2186,15 @@ body {
 .boards-flex-container {
   display: flex;
   flex-direction: row; /* Default to horizontal */
-  flex-wrap: wrap;     /* This allows them to go to the next line */
-  gap: 24px;           /* Classy spacing */
+  flex-wrap: wrap; /* This allows them to go to the next line */
+  gap: 24px; /* Classy spacing */
   padding: 20px;
   align-items: flex-start;
   justify-content: flex-start;
 }
 
 .board-outer-wrap {
-  width: 320px;        /* Fixed width for desktop boards */
+  width: 320px; /* Fixed width for desktop boards */
   flex-shrink: 0;
 }
 
@@ -2236,7 +2207,7 @@ body {
 
   .boards-flex-container {
     flex-direction: column !important; /* Force vertical stack */
-    align-items: center !important;    /* Center the 95% width cards */
+    align-items: center !important; /* Center the 95% width cards */
     padding: 10px 0;
     gap: 20px;
   }
@@ -2250,13 +2221,7 @@ body {
   .modern-board-card {
     width: 100% !important;
   }
-
 }
-
-
-
-
-
 
 /* 1. The main wrapper must allow scrolling */
 .app-wrapper {
@@ -2279,7 +2244,7 @@ body {
 .boards-flex-container {
   display: grid;
   /* Automatically fits as many as possible (approx 4-5) */
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
   width: 100%;
   max-width: 1800px;
@@ -2314,7 +2279,6 @@ body {
   }
 }
 
-
 /* 1. The Main Scroll Area */
 .boards-scroll-area {
   padding: 40px 20px;
@@ -2343,19 +2307,23 @@ body {
 .modern-board-card {
   width: 100%;
   /* The 'Beautiful' Height: Fixed but scrollable inside */
-  height: 350px; 
+  height: 350px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 24px;
   display: flex;
   flex-direction: column;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.02),
+    0 2px 4px -1px rgba(0, 0, 0, 0.01);
 }
 
 .modern-board-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.05),
+    0 10px 10px -5px rgba(0, 0, 0, 0.02);
   border-color: #cbd5e1;
 }
 
@@ -2374,12 +2342,13 @@ body {
 }
 
 /* --- Refined Shimmer Effect --- */
-.skeleton-header, .skeleton-note {
+.skeleton-header,
+.skeleton-note {
   background: #f8fafc;
   background-image: linear-gradient(
-    90deg, 
-    #f8fafc 0px, 
-    #f1f5f9 50%, 
+    90deg,
+    #f8fafc 0px,
+    #f1f5f9 50%,
     #f8fafc 100%
   );
   background-size: 200% 100%;
@@ -2400,12 +2369,20 @@ body {
 }
 
 /* Stagger the widths of notes for a realistic 'content' look */
-.skeleton-note:nth-child(3) { width: 90%; }
-.skeleton-note:nth-child(4) { width: 95%; }
+.skeleton-note:nth-child(3) {
+  width: 90%;
+}
+.skeleton-note:nth-child(4) {
+  width: 95%;
+}
 
 @keyframes shimmer-premium {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 /* --- Match the Grid exactly --- */
@@ -2423,12 +2400,13 @@ body {
 }
 
 /* --- Refined Shimmer Effect --- */
-.skeleton-header, .skeleton-note {
+.skeleton-header,
+.skeleton-note {
   background: #f8fafc;
   background-image: linear-gradient(
-    90deg, 
-    #f8fafc 0px, 
-    #f1f5f9 50%, 
+    90deg,
+    #f8fafc 0px,
+    #f1f5f9 50%,
     #f8fafc 100%
   );
   background-size: 200% 100%;
@@ -2449,14 +2427,21 @@ body {
 }
 
 /* Stagger the widths of notes for a realistic 'content' look */
-.skeleton-note:nth-child(3) { width: 90%; }
-.skeleton-note:nth-child(4) { width: 95%; }
-
-@keyframes shimmer-premium {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+.skeleton-note:nth-child(3) {
+  width: 90%;
+}
+.skeleton-note:nth-child(4) {
+  width: 95%;
 }
 
+@keyframes shimmer-premium {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
 
 /* --- Visual Side Enhancements --- */
 .aurora-glow {
@@ -2465,7 +2450,12 @@ body {
   left: -20%;
   width: 140%;
   height: 140%;
-  background: radial-gradient(circle at 30% 30%, #7c3aed 0%, #3b82f6 30%, #0f172a 70%);
+  background: radial-gradient(
+    circle at 30% 30%,
+    #7c3aed 0%,
+    #3b82f6 30%,
+    #0f172a 70%
+  );
   opacity: 0.6;
   filter: blur(80px);
   z-index: 0;
@@ -2496,7 +2486,7 @@ body {
 }
 
 .tiny-orbit::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -2px;
   left: 50%;
@@ -2554,10 +2544,10 @@ body {
   height: 100vh;
   width: 100vw;
   /* Instead of black, we use a translucent white or navy with a blur */
-  background: rgba(255, 255, 255, 0.4); 
+  background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(20px); /* This is the magic for the 'glass' look */
   -webkit-backdrop-filter: blur(20px);
-  
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2581,7 +2571,8 @@ body {
   animation: sync-spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-.sync-dot-p1, .sync-dot-p2 {
+.sync-dot-p1,
+.sync-dot-p2 {
   position: absolute;
   width: 10px;
   height: 10px;
@@ -2612,6 +2603,66 @@ body {
   text-transform: uppercase;
 }
 
+/* Container for the input and button */
+.board-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #f1f5f9; /* Light frost background */
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 4px;
+  min-width: 280px; /* Prevents it from getting too tiny */
+  transition: all 0.2s ease;
+}
 
+.board-input-wrapper:focus-within {
+  background: #ffffff;
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
 
+.board-input-wrapper input {
+  flex: 1; /* This tells the input to take all available space */
+  min-width: 0; /* CRITICAL: Allows input to shrink below its default size */
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  outline: none;
+  color: #1e293b;
+}
 
+.board-input-wrapper button {
+  background: #0f172a;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap; /* Prevents the text 'Create' from breaking into two lines */
+  transition: opacity 0.2s;
+}
+
+.board-input-wrapper button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --- MOBILE SPECIFIC FIX --- */
+@media (max-width: 600px) {
+  .workspace-right {
+    width: 100%;
+  }
+
+  .board-input-wrapper {
+    width: 100%; /* Spans the full width of the phone */
+    min-width: unset;
+    margin-top: 10px;
+  }
+
+  .board-input-wrapper button {
+    padding: 8px 12px; /* Slightly tighter on mobile */
+  }
+}
